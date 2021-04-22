@@ -1,10 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 
-
-import CustomHeader,{ addNumber } from './Components/CustomHeader'
+import CustomHeader,{ addNumber } from './Components/CustomHeader';
 import Counter from './Components/Counter';
-import ChildComponent from './Components/ChangeNumber';
 
 const App = () => {
   //const addedNumber = addNumber(1,2);
@@ -14,22 +12,28 @@ const App = () => {
     setChangedNumber(newNumber);
   }
   const lowerThanZero = (liczba:number)=>{
-    if(liczba<0)
-    {
-      return (<div>liczba jest mniejsza od 0</div>)
-    }
+    if(liczba<0){return (<div>liczba jest mniejsza od 0</div>)}
+  }
+  const greaterThanZero = (liczba:number)=>{
+    if(liczba>0){return (<div>liczba jest wieksza od 0</div>)}
+  }
+  const lowerThanMinus10 = (liczba:number)=>{
+    if(liczba<-10){return (<div>liczba jest mniejsza od -10</div>)}
+  }
+  const greaterThan = (liczba:number)=>{
+    if(liczba>15){return (<div>liczba przekroczona</div>)}
+    if(liczba>10){return (<div>liczba jest wieksza od 10</div>)}
   }
   return (
     <div className="App">
       <CustomHeader>        
         {/* <Counter onNumberChange={(newNumber)=>{ console.log(newNumber) }}/> */}
-        <Counter onNumberChange={handleNumberChange}/>
-        {
-          changeNumber > 0 && (<div> liczba jest wieksza od 0</div>)
-        }
+        <Counter onNumberChange={handleNumberChange} />
+        {greaterThanZero(changeNumber)}
         {lowerThanZero(changeNumber)}
+        {lowerThanMinus10(changeNumber)}
+        {greaterThan(changeNumber)}
       </CustomHeader>
-      <ChildComponent></ChildComponent>
       
         
     </div>
