@@ -1,41 +1,25 @@
 import React from 'react';
 import logo from './logo.svg';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import CustomHeader,{ addNumber } from './Components/CustomHeader';
-import Counter from './Components/Counter';
+import Movie from './Views/movie/Movie';
+import Home from './Views/home/Home';
+import Page404 from './Views/page404/Page404';
+
+import './App.css';
+
 
 const App = () => {
-  //const addedNumber = addNumber(1,2);
-  const [changeNumber,setChangedNumber]=React.useState(0);
   
-  const handleNumberChange = (newNumber: number) => {
-    setChangedNumber(newNumber);
-  }
-  const lowerThanZero = (liczba:number)=>{
-    if(liczba<0){return (<div>liczba jest mniejsza od 0</div>)}
-  }
-  const greaterThanZero = (liczba:number)=>{
-    if(liczba>0){return (<div>liczba jest wieksza od 0</div>)}
-  }
-  const lowerThanMinus10 = (liczba:number)=>{
-    if(liczba<-10){return (<div>liczba jest mniejsza od -10</div>)}
-  }
-  const greaterThan = (liczba:number)=>{
-    if(liczba>15){return (<div>liczba przekroczona</div>)}
-    if(liczba>10){return (<div>liczba jest wieksza od 10</div>)}
-  }
   return (
     <div className="App">
-      <CustomHeader>        
-        {/* <Counter onNumberChange={(newNumber)=>{ console.log(newNumber) }}/> */}
-        <Counter onNumberChange={handleNumberChange} />
-        {greaterThanZero(changeNumber)}
-        {lowerThanZero(changeNumber)}
-        {lowerThanMinus10(changeNumber)}
-        {greaterThan(changeNumber)}
-      </CustomHeader>
-      
-        
+        <BrowserRouter>
+          <Switch>
+            <Route path="/movie/:id" component={Movie}/>
+            <Route path="/" component={Home} exact />
+            <Route path="*" component={Page404}/>
+          </Switch>
+        </BrowserRouter>
     </div>
   );
 }
